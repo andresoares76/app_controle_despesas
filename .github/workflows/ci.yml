@@ -1,4 +1,4 @@
-name: CI - App Controle Despesas
+name: CI - App Controle Despesas (Frontend + Backend)
 
 on:
   push:
@@ -7,22 +7,45 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-frontend:
     runs-on: ubuntu-latest
+    name: Build Frontend
 
     steps:
       - name: Checkout Código
-        uses: actions/checkout@v4  # Sem path, checkout normal!
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # Ajuste a versão conforme seu projeto
+          node-version: '20'  # ou ajuste se precisar outra versão
 
-      - name: Instalar Dependências
-        run: npm install
-        working-directory: app_controle_despesas
+      - name: Instalar Dependências Frontend
+        run: |
+          cd frontend
+          npm install
 
-      - name: Buildar Projeto
-        run: npm run build
-        working-directory: app_controle_despesas
+      - name: Buildar Frontend
+        run: |
+          cd frontend
+          npm run build
+
+  build-backend:
+    runs-on: ubuntu-latest
+    name: Build Backend
+    needs: build-frontend  # Espera o frontend terminar primeiro (opcional)
+
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Dependências Backend
+        run: |
+          cd backend
+          npm install
+
