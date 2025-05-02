@@ -8,7 +8,6 @@ import userRoutes from './routes/userRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import { validateToken } from './controllers/authController.js';
 
-erroooooo
 dotenv.config();
 
 const app = express();
