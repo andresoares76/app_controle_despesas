@@ -1,4 +1,4 @@
-import pkg from '@prisma/client';
+import pkg from '../lib/prisma.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
