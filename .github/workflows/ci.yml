@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout Código
         uses: actions/checkout@v4
+        with:
+          path: app_controle_despesas
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
