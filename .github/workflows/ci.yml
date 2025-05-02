@@ -10,11 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: app_controle_despesas  # <- Mudamos aqui!
+
     steps:
       - name: Checkout Código
-        uses: actions/checkout@v4
-        with:
-          path: app_controle_despesas
+        uses: actions/checkout@v4   # <-- sem path aqui!
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -22,9 +24,7 @@ jobs:
           node-version: '20'
 
       - name: Instalar Dependências
-        working-directory: ./app_controle_despesas
         run: npm install
 
       - name: Buildar Projeto
-        working-directory: ./app_controle_despesas
         run: npm run build
