@@ -13,20 +13,16 @@ jobs:
     steps:
       - name: Checkout Código
         uses: actions/checkout@v4
-        with:
-          path: .  # <<< Esta linha é o segredo
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # ou a versão do seu projeto
+          node-version: '20'
 
       - name: Instalar Dependências
+        working-directory: ./app_controle_despesas
         run: npm install
 
       - name: Buildar Projeto
+        working-directory: ./app_controle_despesas
         run: npm run build
-
-      # (Opcional) Rodar Testes
-      # - name: Rodar Testes
-      #   run: npm test
