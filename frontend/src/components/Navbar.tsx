@@ -17,6 +17,11 @@ interface NavbarProps {
   toggleSidebar: () => void;
 }
 
+const handleLogout = () => {
+  localStorage.removeItem('token'); // Remove o token
+  window.location.reload(); // Recarrega a página para forçar voltar para login
+};
+
 const Navbar = ({ toggleSidebar }: NavbarProps) => {
   const handleLoginClick = () => {
     toast.info('Funcionalidade de login será implementada em breve!');
@@ -71,7 +76,7 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
               <span>Backup</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLoginClick}>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
               <span>Sair</span>
             </DropdownMenuItem>

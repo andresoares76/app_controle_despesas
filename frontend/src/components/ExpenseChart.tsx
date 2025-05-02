@@ -3,8 +3,9 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { Expense } from '@/lib/types';
-import { calculateExpenseSummary, categories } from '@/lib/mockData';
+import { Expense } from '@/types/expense';
+import { categories } from '@/lib/mockData';
+import { calculateExpenseSummary } from '@/lib/calculateExpenseSummary';
 
 interface ExpenseChartProps {
   expenses: Expense[];

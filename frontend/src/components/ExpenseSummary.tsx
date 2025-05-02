@@ -2,8 +2,8 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DollarSign, Wallet, CreditCard, TrendingUp } from 'lucide-react';
-import { Expense } from '@/lib/types';
-import { calculateExpenseSummary } from '@/lib/mockData';
+import { Expense } from '@/types/expense';
+import { calculateExpenseSummary } from '@/lib/calculateExpenseSummary';
 
 interface ExpenseSummaryProps {
   expenses: Expense[];

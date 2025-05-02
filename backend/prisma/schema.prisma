@@ -1,0 +1,47 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Categories {
+  id        Int        @id @default(autoincrement())
+  name      String?    @db.VarChar(255)
+  user_id   Int?
+  createdAt DateTime   @db.Timestamptz(6)
+  updatedAt DateTime   @db.Timestamptz(6)
+
+  // RELAÇÃO REVERSA
+  expenses  Expenses[] @relation("CategoryExpenses")
+}
+
+model Expenses {
+  id          Int       @id @default(autoincrement())
+  title       String?   @db.VarChar(255)
+  amount      Float?
+  date        DateTime? @db.Timestamptz(6)
+  category_id Int?
+  user_id     Int?
+  createdAt   DateTime  @db.Timestamptz(6)
+  updatedAt   DateTime  @db.Timestamptz(6)
+
+  // RELAÇÃO COM CATEGORIES
+  category    Categories? @relation("CategoryExpenses", fields: [category_id], references: [id])
+}
+
+model SequelizeMeta {
+  name String @id @db.VarChar(255)
+}
+
+model Users {
+  id            Int      @id @default(autoincrement())
+  name          String?  @db.VarChar(255)
+  email         String?  @unique @db.VarChar(255) // <<<<<<<<<< CORREÇÃO AQUI
+  password_hash String?  @db.VarChar(255)
+  createdAt     DateTime @db.Timestamptz(6)
+  updatedAt     DateTime @db.Timestamptz(6)
+}
+

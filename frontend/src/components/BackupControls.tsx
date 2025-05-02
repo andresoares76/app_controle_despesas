@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Cloud, CloudOff, Download, Upload } from 'lucide-react';
-import { Expense } from '@/lib/types';
+import { Expense } from '@/types/expense';
 import { toast } from 'sonner';
 
 interface BackupControlsProps {

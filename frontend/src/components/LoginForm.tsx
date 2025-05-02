@@ -1,26 +1,45 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AtSign, KeyRound, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import api from '@/services/api'; // Importa o Axios configurado
+import { useNavigate } from 'react-router-dom'; // Para redirecionar após login
 
-const LoginForm = () => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  
-  const handleSubmit = (e: React.FormEvent) => {
+interface LoginFormProps {
+  onLoginSuccess: () => void;
+}
+
+const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate loading
-    setTimeout(() => {
+
+    try {
+      const response = await api.post('/auth/login', { email, senha });
+      const { token } = response.data;
+
+      localStorage.setItem('token', token);
+
+      toast.success('Login realizado com sucesso!');
+
+      onLoginSuccess(); // <-- chama a função para avisar o Index.tsx
+      
+    } catch (error) {
+      console.error('Erro ao fazer login', error);
+      toast.error('E-mail ou senha inválidos!');
+    } finally {
       setIsLoading(false);
-      toast.info('Funcionalidade de login será implementada em breve!');
-    }, 1500);
+    }
   };
-  
+
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader className="space-y-1">
@@ -40,6 +59,8 @@ const LoginForm = () => {
                 placeholder="seu.email@exemplo.com"
                 className="pl-10"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -57,6 +78,8 @@ const LoginForm = () => {
                 id="password"
                 type="password"
                 className="pl-10"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
                 required
               />
             </div>
@@ -88,3 +111,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
