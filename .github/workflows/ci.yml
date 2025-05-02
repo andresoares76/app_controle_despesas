@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: .  # <- Garante que vai rodar da raiz do repositório
+
     steps:
       - name: Checkout Código
         uses: actions/checkout@v4
@@ -17,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # ou a versão do seu projeto
+          node-version: '20'  # ou a versão que você usa
 
       - name: Instalar Dependências
         run: npm install
@@ -25,10 +29,6 @@ jobs:
       - name: Buildar Projeto
         run: npm run build
 
-      # (Opcional) Executar testes automáticos
+      # (Opcional) Rodar Testes
       # - name: Rodar Testes
       #   run: npm test
-
-      # (Opcional) Deploy em outro servidor ou plataforma
-      # - name: Deploy
-      #   run: ./scripts/deploy.sh  # ou outro método
