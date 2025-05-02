@@ -10,18 +10,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: .  # <- Garante que vai rodar da raiz do repositório
-
     steps:
       - name: Checkout Código
         uses: actions/checkout@v4
+        with:
+          path: .  # <<< Esta linha é o segredo
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # ou a versão que você usa
+          node-version: '20'  # ou a versão do seu projeto
 
       - name: Instalar Dependências
         run: npm install
