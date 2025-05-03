@@ -1,8 +1,7 @@
-import pkg from '../lib/prisma.js';
+import { PrismaClient } from '../lib/prisma.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
 
 // Fazer login

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Criação do cliente axios
 const api = axios.create({
-  baseURL: 'http://localhost:3001', // Apontando para o seu backend
+  baseURL: 'http://appcontroledespesaspuc-env.eba-pfynsngw.sa-east-1.elasticbeanstalk.com/', // Apontando para o seu backend
 });
 
 // Interceptor para enviar o token automaticamente
